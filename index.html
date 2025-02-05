@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telefon Satışı</title>
+    <title>RHProWash - Avtomobil Yuma Xidməti</title>
     <style>
         * {
             margin: 0;
@@ -12,196 +12,87 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background-color: #f4f4f4;
-            overflow-x: hidden;
+            background-color: #1a1a1a;
+            color: white;
         }
         header {
-            background: linear-gradient(90deg, #ff0000, #990000);
-            color: white;
-            padding: 15px 0;
+            background: linear-gradient(90deg, #0066cc, #003366);
+            padding: 20px;
             text-align: center;
             font-size: 24px;
             font-weight: bold;
-            animation: fadeInDown 1s ease-out;
         }
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1.5s ease-in-out;
+            background: #2b2b2b;
+            border-radius: 10px;
         }
-        .filter {
-            margin-bottom: 20px;
+        .service {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-        }
-        .filter input, .filter select {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            width: 30%;
-        }
-        .product {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #555;
             padding: 15px 0;
+        }
+        .service h3 {
+            margin: 0;
+        }
+        .service p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .btn {
+            background: #0066cc;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            opacity: 1;
-            transform: translateY(0);
-            animation: fadeUp 1s ease-out forwards;
-            position: relative;
+            transition: 0.3s;
         }
-        .product img {
-            width: 80px;
-            height: auto;
-            margin-right: 15px;
-            transition: transform 0.3s ease-in-out;
+        .btn:hover {
+            background: #004b99;
         }
-        .product:hover img {
-            transform: scale(1.1);
+        .contact {
+            margin-top: 30px;
+            text-align: center;
         }
-        .cart {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        .cart h2 {
-            margin-bottom: 10px;
-        }
-        .cart ul {
-            list-style: none;
-            padding: 0;
-        }
-        .cart-total {
-            margin-top: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff0000;
-        }
-        .cart-popup {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.5s ease-in-out;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .contact p {
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
-    <header>📱 RAH Phone Store 📱</header>
+    <header>RHProWash - Peşəkar Avtomobil Yuma Xidməti</header>
     <div class="container">
-        <div class="filter">
-            <input type="text" id="search" placeholder="Məhsul axtarın..." onkeyup="filterProducts()">
-            <select id="brandFilter" onchange="filterProducts()">
-                <option value="">Brendlərə görə süz</option>
-                <option value="Apple">Apple</option>
-                <option value="Samsung">Samsung</option>
-                <option value="Xiaomi">Xiaomi</option>
-            </select>
+        <h2>Xidmətlərimiz</h2>
+        <div class="service">
+            <div>
+                <h3>Ekspress Yuma</h3>
+                <p>Avtomobilin xarici təmizliyi və şüşələrin silinməsi.</p>
+            </div>
+            <button class="btn" onclick="window.open('reservation.html', '_blank')">Rezervasiya Et</button>
         </div>
-        <div id="productList">
-            <div class="product">
-                <img src="iphone16.png" alt="iPhone 16 Pro">
-                <div>
-                    <h3>iPhone 16 Pro</h3>
-                    <p>Qiymət: 4500 AZN</p>
-                    <button onclick="addToCart(event, 'iPhone 16 Pro', 4500, 'Yeni nəsil iPhone 16 Pro, A17 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
-                </div>
+        <div class="service">
+            <div>
+                <h3>Daxili və Xarici Yuma</h3>
+                <p>Avtomobilin tam daxili və xarici təmizliyi.</p>
             </div>
-
-            <div class="product">
-                <img src="iphone15.png" alt="iPhone 15 Pro">
-                <div>
-                    <h3>iPhone 15 Pro</h3>
-                    <p>Qiymət: 3500 AZN</p>
-                    <button onclick="addToCart(event, 'iPhone 15 Pro', 3500, 'Yeni nəsil iPhone 15 Pro, A15 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
-                </div>
-            </div>
-            <div class="product">
-                <img src="iphone13.png" alt="iPhone 15 Pro">
-                <div>
-                    <h3>iPhone 13 Pro</h3>
-                    <p>Qiymət: 2500 AZN</p>
-                    <button onclick="addToCart(event, 'iPhone 13 Pro', 2500, 'Yeni nəsil iPhone 13 Pro, A13 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
-                </div>
-            </div>
-            <div class="product">
-                <img src="Samsung22ultra.png" alt="Samsung S22 Ultra">
-                <div>
-                    <h3>Samsung S22 Ultra</h3>
-                    <p>Qiymət: 4500 AZN</p>
-                    <button onclick="addToCart(event, 'Samsung S22 Ultra', 4500, 'Yeni nəsil Samsung S22 Ultra, A17 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
-                </div>
-            </div>
-            <div class="product">
-                <img src="Samsungnote8.png" alt="Samsung Note 8">
-                <div>
-                    <h3>Samsung Note 8</h3>
-                    <p>Qiymət: 2800 AZN</p>
-                    <button onclick="addToCart(event, 'Samsung Note 8', 2800, 'Yeni nəsil Samsung Note 8, A15 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
-                </div>
-            </div>
-            <div class="product">
-                <img src="Xioaminote13pro.png" alt="Xioami Note 13 Pro">
-                <div>
-                    <h3>Xioami Note 13 Pro</h3>
-                    <p>Qiymət: 1500 AZN</p>
-                    <button onclick="addToCart(event, 'Xioami Note 13 Pro', 3500, 'Yeni nəsil Xioami Note 13 Pro, A11 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
-                </div>
-            </div>
+            <button class="btn" onclick="window.open('reservation.html', '_blank')">Rezervasiya Et</button>
         </div>
-        <div class="cart">
-            <h2>Səbət</h2>
-            <ul id="cartItems"></ul>
-            <p class="cart-total">Cəmi: <span id="cartTotal">0</span> AZN</p>
+        <div class="service">
+            <div>
+                <h3>Keramik Qoruma</h3>
+                <p>Boya qoruma və uzunmüddətli parıltı üçün keramik örtük.</p>
+            </div>
+            <button class="btn" onclick="window.open('reservation.html', '_blank')">Rezervasiya Et</button>
+        </div>
+        <div class="contact">
+            <h2>Bizimlə Əlaqə</h2>
+            <p>📍 Ünvan: Bakı, Yasamal</p>
+            <p>📞 Tel: +994-70-650-59-99</p>
         </div>
     </div>
-    <div id="cartPopup" class="cart-popup"></div>
-    <script>
-        let cart = [];
-        function addToCart(event, name, price, description) {
-            event.stopPropagation();
-            cart.push({ name, price, description });
-            updateCart();
-            showCartPopup(name, price, description);
-        }
-        function updateCart() {
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            cartItems.innerHTML = '';
-            let total = 0;
-            cart.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = `${item.name} - ${item.price} AZN`;
-                cartItems.appendChild(li);
-                total += item.price;
-            });
-            cartTotal.textContent = total;
-        }
-        function showCartPopup(name, price, description) {
-            const popup = document.getElementById('cartPopup');
-            popup.innerHTML = `<strong>${name}</strong><br>${description}<br><span style='color: red; font-weight: bold;'>Qiymət: ${price} AZN</span>`;
-            popup.style.display = 'block';
-            setTimeout(() => { popup.style.display = 'none'; }, 3000);
-        }
-    </script>
 </body>
 </html>
-
-
-            
