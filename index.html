@@ -1,1 +1,207 @@
-<h1>Hello world</h1>
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefon Satışı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(90deg, #ff0000, #990000);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            animation: fadeInDown 1s ease-out;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .filter {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .filter input, .filter select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 30%;
+        }
+        .product {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            cursor: pointer;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeUp 1s ease-out forwards;
+            position: relative;
+        }
+        .product img {
+            width: 80px;
+            height: auto;
+            margin-right: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .product:hover img {
+            transform: scale(1.1);
+        }
+        .cart {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .cart h2 {
+            margin-bottom: 10px;
+        }
+        .cart ul {
+            list-style: none;
+            padding: 0;
+        }
+        .cart-total {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff0000;
+        }
+        .cart-popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.5s ease-in-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>📱 RAH Phone Store 📱</header>
+    <div class="container">
+        <div class="filter">
+            <input type="text" id="search" placeholder="Məhsul axtarın..." onkeyup="filterProducts()">
+            <select id="brandFilter" onchange="filterProducts()">
+                <option value="">Brendlərə görə süz</option>
+                <option value="Apple">Apple</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Xiaomi">Xiaomi</option>
+            </select>
+        </div>
+        <div id="productList">
+            <div class="product">
+                <img src="iphone16.png" alt="iPhone 16 Pro">
+                <div>
+                    <h3>iPhone 16 Pro</h3>
+                    <p>Qiymət: 4500 AZN</p>
+                    <button onclick="addToCart(event, 'iPhone 16 Pro', 4500, 'Yeni nəsil iPhone 16 Pro, A17 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="iphone15.png" alt="iPhone 15 Pro">
+                <div>
+                    <h3>iPhone 15 Pro</h3>
+                    <p>Qiymət: 3500 AZN</p>
+                    <button onclick="addToCart(event, 'iPhone 15 Pro', 3500, 'Yeni nəsil iPhone 15 Pro, A15 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="iphone13.png" alt="iPhone 15 Pro">
+                <div>
+                    <h3>iPhone 13 Pro</h3>
+                    <p>Qiymət: 2500 AZN</p>
+                    <button onclick="addToCart(event, 'iPhone 13 Pro', 2500, 'Yeni nəsil iPhone 13 Pro, A13 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Samsung22ultra.png" alt="Samsung S22 Ultra">
+                <div>
+                    <h3>Samsung S22 Ultra</h3>
+                    <p>Qiymət: 4500 AZN</p>
+                    <button onclick="addToCart(event, 'Samsung S22 Ultra', 4500, 'Yeni nəsil Samsung S22 Ultra, A17 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Samsungnote8.png" alt="Samsung Note 8">
+                <div>
+                    <h3>Samsung Note 8</h3>
+                    <p>Qiymət: 2800 AZN</p>
+                    <button onclick="addToCart(event, 'Samsung Note 8', 2800, 'Yeni nəsil Samsung Note 8, A15 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Xioaminote13pro.png" alt="Xioami Note 13 Pro">
+                <div>
+                    <h3>Xioami Note 13 Pro</h3>
+                    <p>Qiymət: 1500 AZN</p>
+                    <button onclick="addToCart(event, 'Xioami Note 13 Pro', 3500, 'Yeni nəsil Xioami Note 13 Pro, A11 çipi ilə təchiz olunub.')">Səbətə əlavə et</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart">
+            <h2>Səbət</h2>
+            <ul id="cartItems"></ul>
+            <p class="cart-total">Cəmi: <span id="cartTotal">0</span> AZN</p>
+        </div>
+    </div>
+    <div id="cartPopup" class="cart-popup"></div>
+    <script>
+        let cart = [];
+        function addToCart(event, name, price, description) {
+            event.stopPropagation();
+            cart.push({ name, price, description });
+            updateCart();
+            showCartPopup(name, price, description);
+        }
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - ${item.price} AZN`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+            cartTotal.textContent = total;
+        }
+        function showCartPopup(name, price, description) {
+            const popup = document.getElementById('cartPopup');
+            popup.innerHTML = `<strong>${name}</strong><br>${description}<br><span style='color: red; font-weight: bold;'>Qiymət: ${price} AZN</span>`;
+            popup.style.display = 'block';
+            setTimeout(() => { popup.style.display = 'none'; }, 3000);
+        }
+    </script>
+</body>
+</html>
+
+
+            
