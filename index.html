@@ -86,6 +86,11 @@
             background: #f9f9f9;
             border-radius: 8px;
         }
+        .cart-total {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -104,6 +109,7 @@
         <div class="cart">
             <h2>Səbət</h2>
             <ul id="cartItems"></ul>
+            <p class="cart-total">Cəmi: <span id="cartTotal">0</span> AZN</p>
         </div>
     </div>
     <script>
@@ -113,6 +119,8 @@
             { name: "Samsung S22 Ultra", price: 4500, image: "samsung22.png", brand: "Samsung" },
             { name: "Xiaomi Note 13 Pro", price: 3000, image: "xiaomi13.png", brand: "Xiaomi" }
         ];
+        
+        let cartTotal = 0;
         
         function loadProducts(filteredList = products) {
             const productList = document.getElementById("productList");
@@ -132,9 +140,14 @@
         
         function addToCart(name, price) {
             const cartItems = document.getElementById("cartItems");
+            const cartTotalElem = document.getElementById("cartTotal");
+            
             const li = document.createElement("li");
             li.textContent = `${name} - ${price} AZN`;
             cartItems.appendChild(li);
+            
+            cartTotal += price;
+            cartTotalElem.textContent = cartTotal;
         }
         
         function filterProducts() {
